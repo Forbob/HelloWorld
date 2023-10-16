@@ -1,0 +1,947 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "",
+    "version" : "2.0",
+    "title" : "SearchApi",
+    "license" : {
+      "name" : "ISC",
+      "url" : "https://opensource.org/licenses/ISC/"
+    }
+  },
+  "tags" : [ {
+    "name" : "SOLR SearchApi 2.0",
+    "description" : "Search REST API"
+  } ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/search/author" : {
+      "get" : {
+        "tags" : [ "Author Search" ],
+        "summary" : "Get all Authors in SOLR",
+        "parameters" : [ {
+          "name" : "authorType",
+          "in" : "query",
+          "description" : "authorType of the requested Author",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "blog",
+          "in" : "query",
+          "description" : "Publication or Author, values: [true, false], leave null for the retrieval of both",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "name of the requested Author, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "naturalId",
+          "in" : "query",
+          "description" : "naturalId of the requested Author, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "query",
+          "in" : "query",
+          "description" : "Query sent from the frontend, can be surrounded by double quotes for exact search",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "start",
+          "in" : "query",
+          "description" : "Number of Author documents to skip",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Number of Author documents to limit the response to",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortField",
+          "in" : "query",
+          "description" : "The field to sort the result upon",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "description" : "Sorting Order: values: [ASC, DESC]",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "startDate",
+          "in" : "query",
+          "description" : "Returns documents where date >= the passed value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "endDate",
+          "in" : "query",
+          "description" : "Returns documents where date <= the passed value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "visible",
+          "in" : "query",
+          "description" : "Returns only visible Authors, values: [true, false], leave null for the retrieval of both",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Author"
+            }
+          }
+        }
+      }
+    },
+    "/search/content" : {
+      "get" : {
+        "tags" : [ "Content Search" ],
+        "summary" : "Get all Contents in SOLR",
+        "parameters" : [ {
+          "name" : "author",
+          "in" : "query",
+          "description" : "Author Name of the requested Content, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "naturalId",
+          "in" : "query",
+          "description" : "naturalId of the requested Content, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "source",
+          "in" : "query",
+          "description" : "source of the requested Content, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "description" : "title of the requested Content, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "query",
+          "in" : "query",
+          "description" : "Query sent from the frontend, can be surrounded by double quotes for exact search",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "start",
+          "in" : "query",
+          "description" : "Number of Content documents to skip",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Number of Content documents to limit the response to",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortField",
+          "in" : "query",
+          "description" : "The field to sort the result upon",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "description" : "Sorting Order: values: [ASC, DESC]",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "startDate",
+          "in" : "query",
+          "description" : "Returns documents where date >= the passed value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "endDate",
+          "in" : "query",
+          "description" : "Returns documents where date <= the passed value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "visible",
+          "in" : "query",
+          "description" : "Returns only visible Content, values: [true, false], leave null for the retrieval of both",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Content"
+            }
+          }
+        }
+      }
+    },
+    "/search/storypackage" : {
+      "get" : {
+        "tags" : [ "StoryPackage Search" ],
+        "summary" : "Get all StoryPackages in SOLR",
+        "parameters" : [ {
+          "name" : "naturalId",
+          "in" : "query",
+          "description" : "NaturalId of the requested StoryPackage, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "ID of the requested StoryPackage, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "name of the requested StoryPackage, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "description" : "Title of the requested StoryPackage, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "query",
+          "in" : "query",
+          "description" : "Query sent from the frontend, can be surrounded by double quotes for exact search",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "start",
+          "in" : "query",
+          "description" : "Number of StoryPackage documents to skip",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Number of StoryPackage documents to limit the response to",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortField",
+          "in" : "query",
+          "description" : "The field to sort the result upon",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "description" : "Sorting Order: values: [ASC, DESC]",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "startDate",
+          "in" : "query",
+          "description" : "Returns documents where createdDate >= the passed value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "endDate",
+          "in" : "query",
+          "description" : "Returns documents where createdDate <= the passed value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "visible",
+          "in" : "query",
+          "description" : "Returns only visible documents, values: [true, false], leave null for the retrieval of both",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/StoryPackage"
+            }
+          }
+        }
+      }
+    },
+    "/search/edittools/content" : {
+      "get" : {
+        "tags" : [ "Content Search" ],
+        "summary" : "Get all Contents in SOLR",
+        "parameters" : [ {
+          "name" : "author",
+          "in" : "query",
+          "description" : "Author Name of the requested Content, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "naturalId",
+          "in" : "query",
+          "description" : "naturalId of the requested Content, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "source",
+          "in" : "query",
+          "description" : "source of the requested Content, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "description" : "title of the requested Content, surrounded by double quotes",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "query",
+          "in" : "query",
+          "description" : "Query sent from the frontend, can be surrounded by double quotes for exact search",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "start",
+          "in" : "query",
+          "description" : "Number of Content documents to skip",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Number of Content documents to limit the response to",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortField",
+          "in" : "query",
+          "description" : "The field to sort the result upon",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "description" : "Sorting Order: values: [ASC, DESC]",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "startDate",
+          "in" : "query",
+          "description" : "Returns documents where date >= the passed value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "endDate",
+          "in" : "query",
+          "description" : "Returns documents where date <= the passed value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "visible",
+          "in" : "query",
+          "description" : "Returns only visible Content, values: [true, false], leave null for the retrieval of both",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Content"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Author" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "acceptedAt" : {
+          "type" : "string"
+        },
+        "acceptedAtV2" : {
+          "type" : "string"
+        },
+        "acceptedVersion" : {
+          "type" : "string"
+        },
+        "acceptedVersionV2" : {
+          "type" : "string"
+        },
+        "adExDesktop" : {
+          "type" : "string"
+        },
+        "adExMobile" : {
+          "type" : "string"
+        },
+        "advoiceBrand" : {
+          "type" : "string"
+        },
+        "allowEmail" : {
+          "type" : "boolean"
+        },
+        "altEmail" : {
+          "type" : "string"
+        },
+        "amazon" : {
+          "type" : "string"
+        },
+        "authorType" : {
+          "type" : "string"
+        },
+        "badges" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "banner" : {
+          "type" : "string"
+        },
+        "blog" : {
+          "type" : "boolean"
+        },
+        "blogName" : {
+          "type" : "string"
+        },
+        "brightcove" : {
+          "type" : "string"
+        },
+        "brightcovePlaylist" : {
+          "type" : "string"
+        },
+        "bvProgramTypes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "bylineFormat" : {
+          "type" : "number"
+        },
+        "contentPaywall" : {
+          "type" : "string"
+        },
+        "contentSource" : {
+          "type" : "string"
+        },
+        "contribSchedule" : {
+          "type" : "string"
+        },
+        "contribStatus" : {
+          "type" : "string"
+        },
+        "contributorSince" : {
+          "type" : "string"
+        },
+        "dailyActivityCount" : {
+          "type" : "number"
+        },
+        "date" : {
+          "type" : "string"
+        },
+        "department" : {
+          "type" : "string"
+        },
+        "disableCanonical" : {
+          "type" : "boolean"
+        },
+        "disabled" : {
+          "type" : "boolean"
+        },
+        "disableDigest" : {
+          "type" : "boolean"
+        },
+        "displayChannel" : {
+          "type" : "string"
+        },
+        "displaySection" : {
+          "type" : "string"
+        },
+        "division" : {
+          "type" : "string"
+        },
+        "doNotPromote" : {
+          "type" : "boolean"
+        },
+        "embargo" : {
+          "type" : "boolean"
+        },
+        "enableContribContact" : {
+          "type" : "boolean"
+        },
+        "enableTwitterFeed" : {
+          "type" : "boolean"
+        },
+        "externalLabel" : {
+          "type" : "string"
+        },
+        "externalUrl" : {
+          "type" : "string"
+        },
+        "facebookName" : {
+          "type" : "string"
+        },
+        "facebookPage" : {
+          "type" : "string"
+        },
+        "freeESPNewsletter" : {
+          "type" : "boolean"
+        },
+        "freeNewsletter" : {
+          "type" : "boolean"
+        },
+        "googlePlus" : {
+          "type" : "string"
+        },
+        "googlePlusPosts" : {
+          "type" : "string"
+        },
+        "inactive" : {
+          "type" : "boolean"
+        },
+        "instagram" : {
+          "type" : "string"
+        },
+        "instagramHandle" : {
+          "type" : "string"
+        },
+        "latestActivityDate" : {
+          "type" : "string"
+        },
+        "linkedIn" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "naturalId" : {
+          "type" : "string"
+        },
+        "primaryBlogNaturalId" : {
+          "type" : "string"
+        },
+        "primaryChannelId" : {
+          "type" : "string"
+        },
+        "primaryContributor" : {
+          "type" : "string"
+        },
+        "primarySectionId" : {
+          "type" : "string"
+        },
+        "profileUrl" : {
+          "type" : "string"
+        },
+        "pubCode" : {
+          "type" : "string"
+        },
+        "quote" : {
+          "type" : "string"
+        },
+        "recentActivityCount" : {
+          "type" : "number"
+        },
+        "resourceId" : {
+          "type" : "string"
+        },
+        "seniorContributor" : {
+          "type" : "boolean"
+        },
+        "shortBio" : {
+          "type" : "string"
+        },
+        "shortUri" : {
+          "type" : "string"
+        },
+        "showNoVestPocket" : {
+          "type" : "boolean"
+        },
+        "slug" : {
+          "type" : "string"
+        },
+        "source" : {
+          "type" : "string"
+        },
+        "specialSlot" : {
+          "type" : "string"
+        },
+        "subType" : {
+          "type" : "string"
+        },
+        "tagName" : {
+          "type" : "string"
+        },
+        "topics" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "twitterFeedHeadline" : {
+          "type" : "string"
+        },
+        "twitterName" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "vendor" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "number"
+        },
+        "visible" : {
+          "type" : "boolean"
+        },
+        "visibleSearch" : {
+          "type" : "boolean"
+        },
+        "webSite" : {
+          "type" : "string"
+        },
+        "youtube" : {
+          "type" : "string"
+        },
+        "youtubePlaylist" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Content" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "advoiceBrand" : {
+          "type" : "string"
+        },
+        "author" : {
+          "type" : "string"
+        },
+        "authorNaturalIds_txt" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "authors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Author"
+          }
+        },
+        "authorType" : {
+          "type" : "string"
+        },
+        "bertieTimestamp" : {
+          "type" : "string"
+        },
+        "blogName" : {
+          "type" : "string"
+        },
+        "blogNaturalId" : {
+          "type" : "string"
+        },
+        "blogRetracted" : {
+          "type" : "boolean"
+        },
+        "blogType" : {
+          "type" : "string"
+        },
+        "bvProgramType" : {
+          "type" : "string"
+        },
+        "channelSection" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "contentSource" : {
+          "type" : "string"
+        },
+        "createdDate" : {
+          "type" : "string"
+        },
+        "customUri" : {
+          "type" : "string"
+        },
+        "date" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "disableStream" : {
+          "type" : "boolean"
+        },
+        "displayChannel" : {
+          "type" : "string"
+        },
+        "displaySection" : {
+          "type" : "string"
+        },
+        "editorialSlot" : {
+          "type" : "string"
+        },
+        "editorsPick" : {
+          "type" : "boolean"
+        },
+        "googleKeywords" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "groupBlog" : {
+          "type" : "string"
+        },
+        "hashtags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "hasMarketPlaceModule" : {
+          "type" : "boolean"
+        },
+        "headgrabCount" : {
+          "type" : "number"
+        },
+        "headgrabIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "image" : {
+          "type" : "string"
+        },
+        "isHotline" : {
+          "type" : "boolean"
+        },
+        "mobileOnly" : {
+          "type" : "string"
+        },
+        "naturalId" : {
+          "type" : "string"
+        },
+        "negativeSentimentCompanies" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "newsKeywords" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "preview" : {
+          "type" : "boolean"
+        },
+        "primaryChannelId" : {
+          "type" : "string"
+        },
+        "primarySectionId" : {
+          "type" : "string"
+        },
+        "pTagCount" : {
+          "type" : "number"
+        },
+        "pubCode" : {
+          "type" : "string"
+        },
+        "removePaywall" : {
+          "type" : "boolean"
+        },
+        "retracted" : {
+          "type" : "boolean"
+        },
+        "retractedOn" : {
+          "type" : "string"
+        },
+        "scheduled" : {
+          "type" : "boolean"
+        },
+        "sentimentScore" : {
+          "type" : "number"
+        },
+        "siteSlug" : {
+          "type" : "string"
+        },
+        "slug" : {
+          "type" : "string"
+        },
+        "source" : {
+          "type" : "string"
+        },
+        "specialSlot" : {
+          "type" : "string"
+        },
+        "spike" : {
+          "type" : "boolean"
+        },
+        "storyType" : {
+          "type" : "string"
+        },
+        "streamSpike" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "subBlogs" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "subContentId" : {
+          "type" : "string"
+        },
+        "subContents" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Content"
+          }
+        },
+        "subType" : {
+          "type" : "string"
+        },
+        "templateSubType" : {
+          "type" : "string"
+        },
+        "templateType" : {
+          "type" : "string"
+        },
+        "tickers" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "trendingHashtags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "trumpContent" : {
+          "type" : "boolean"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "uri" : {
+          "type" : "string"
+        },
+        "uris" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "visible" : {
+          "type" : "boolean"
+        },
+        "visibleSearch" : {
+          "type" : "boolean"
+        },
+        "wordPressInBertie" : {
+          "type" : "boolean"
+        },
+        "writtenByForbesStaff" : {
+          "type" : "boolean"
+        },
+        "yearMonth" : {
+          "type" : "string"
+        }
+      }
+    },
+    "StoryPackage" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "active" : {
+          "type" : "string"
+        },
+        "contentIds" : {
+          "type" : "string"
+        },
+        "createdDate" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "editorialSlot" : {
+          "type" : "string"
+        },
+        "editorIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "naturalId" : {
+          "type" : "string"
+        },
+        "navOrder" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "primaryPageUrl" : {
+          "type" : "string"
+        },
+        "specialSlot" : {
+          "type" : "string"
+        },
+        "sponsored" : {
+          "type" : "boolean"
+        },
+        "storyPackageType" : {
+          "type" : "string"
+        },
+        "thumbnail" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "visible" : {
+          "type" : "boolean"
+        }
+      }
+    }
+  }
+}
